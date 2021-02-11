@@ -63,15 +63,12 @@ while cv2.waitKey(1) < 0:
         if prob > threshold:  # [pointed]
             cv2.circle(frame, (x, y), 5, (0, 255, 255), thickness=-1, lineType=cv2.FILLED)
             cv2.putText(frame, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 1, lineType=cv2.LINE_AA)
-
             points.append((x, y))
 
         else:  # [not pointed]
             cv2.circle(frame, (x, y), 5, (0, 255, 255), thickness=-1, lineType=cv2.FILLED)
             cv2.putText(frame, str(i), (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 1, lineType=cv2.LINE_AA)
-
             points.append(None)
-            print(f"[not pointed] {BODY_PARTS_COCO[i]} ({i}) => prob: {prob:.5f} / x: {x} / y: {y}")
 
     for pair in POSE_PAIRS_COCO:
         part_a = pair[0]  # 0 (Head)
@@ -86,4 +83,4 @@ while cv2.waitKey(1) < 0:
     freq = cv2.getTickFrequency() / 1000
     cv2.putText(frame, '%.2fms' % (t / freq), (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0))
 
-    cv2.imshow("pose estimation tutorial", frame)
+    cv2.imshow("webcam pose estimation with COCO model", frame)
